@@ -1,0 +1,80 @@
+body{
+    margin: 0;
+    background-image: url('../images/siteBackground.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    height: auto;
+    color: #cfd186;
+    font-family: 'Poppins', sans-serif;
+}
+
+h1{
+    color: #552244;
+    font-size: 96px;
+    text-align: center;
+    margin: 30px;
+    border: 2px solid #cfd186;
+    border-radius: 20px;
+}
+
+button{
+    background-color: #5b8c5a;
+    color: #cfd186;
+    border: 1px solid #cfd186;
+    border-radius: 20px;
+}
+
+button:hover{
+    background-color: #552244;
+}
+
+.card-container{
+    margin: auto;
+    width: 95%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 10px 10px;
+}
+
+.card{
+    background-color: #596157;
+    border-radius: 20px;
+    text-align: center;
+    border: 2px solid #cfd186;
+}
+
+.bike-image{
+    margin-top: 20px;
+    border: 2px solid #cfd186;
+    border-radius: 20px;
+}
+
+.card-info-container{
+    margin: 20px 10px 0 30px;
+    font-family: 'Martel', serif;
+}
+
+.card-info-container section{
+    text-align: left;
+}
+
+.card-button-container{
+    margin: 20px 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.card-button-container button{
+    margin: 10px;
+}
+
+.add-form{
+    margin: 30px 0;
+    text-align: center;
+}
+
+.button-add{
+    padding: 40px;
+    font-size: 30px;
+}
