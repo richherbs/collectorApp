@@ -56,7 +56,7 @@ DROP TABLE IF EXISTS `discipline`;
 
 CREATE TABLE `discipline` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `discipline_name` int(11) NOT NULL,
+  `discipline_name` varchar(30) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
