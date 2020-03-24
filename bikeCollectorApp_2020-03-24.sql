@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.7.29)
 # Database: bikeCollectorApp
-# Generation Time: 2020-03-23 16:17:48 +0000
+# Generation Time: 2020-03-24 09:41:17 +0000
 # ************************************************************
 
 
@@ -28,12 +28,21 @@ DROP TABLE IF EXISTS `bikes`;
 CREATE TABLE `bikes` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `brand_ID` int(11) NOT NULL,
-  `model` varchar(11) NOT NULL DEFAULT '',
+  `model` varchar(30) NOT NULL DEFAULT '',
   `discipline_ID` int(11) NOT NULL,
   `wheelSize_ID` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
+LOCK TABLES `bikes` WRITE;
+/*!40000 ALTER TABLE `bikes` DISABLE KEYS */;
+
+INSERT INTO `bikes` (`id`, `brand_ID`, `model`, `discipline_ID`, `wheelSize_ID`)
+VALUES
+	(1,1,'sb130',1,1);
+
+/*!40000 ALTER TABLE `bikes` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table brand
@@ -45,8 +54,17 @@ CREATE TABLE `brand` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `brand_name` varchar(30) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
+LOCK TABLES `brand` WRITE;
+/*!40000 ALTER TABLE `brand` DISABLE KEYS */;
+
+INSERT INTO `brand` (`id`, `brand_name`)
+VALUES
+	(1,'Yeti');
+
+/*!40000 ALTER TABLE `brand` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table discipline
@@ -56,10 +74,19 @@ DROP TABLE IF EXISTS `discipline`;
 
 CREATE TABLE `discipline` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `discipline_name` varchar(30) NOT NULL,
+  `discipline_name` varchar(30) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
+LOCK TABLES `discipline` WRITE;
+/*!40000 ALTER TABLE `discipline` DISABLE KEYS */;
+
+INSERT INTO `discipline` (`id`, `discipline_name`)
+VALUES
+	(1,'trail');
+
+/*!40000 ALTER TABLE `discipline` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table wheelSize
@@ -71,8 +98,17 @@ CREATE TABLE `wheelSize` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `wheel_diameter` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
+LOCK TABLES `wheelSize` WRITE;
+/*!40000 ALTER TABLE `wheelSize` DISABLE KEYS */;
+
+INSERT INTO `wheelSize` (`id`, `wheel_diameter`)
+VALUES
+	(1,29);
+
+/*!40000 ALTER TABLE `wheelSize` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 
