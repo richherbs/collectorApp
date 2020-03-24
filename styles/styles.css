@@ -29,6 +29,18 @@ button:hover{
     background-color: #552244;
 }
 
+a{
+    text-decoration: none;
+    color: #cfd186;
+}
+
+input, select{
+    display: block;
+    width: 100%;
+    border-radius: 20px;
+    border: 2px solid #cfd186;
+}
+
 .card-container{
     margin: auto;
     width: 95%;
@@ -78,4 +90,16 @@ button:hover{
 .button-add{
     padding: 40px;
     font-size: 30px;
+}
+
+.add-bike-form{
+    width: 80%;
+    margin: auto;
+}
+
+.add-bike-form button{
+    text-align: center;
+    padding: 40px;
+    font-size: 30px;
+    margin-top: 30px;
 }
