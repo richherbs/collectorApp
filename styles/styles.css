@@ -48,6 +48,7 @@ button:hover{
     margin-top: 20px;
     border: 2px solid #cfd186;
     border-radius: 20px;
+    width: 95%; 
 }
 
 .card-info-container{

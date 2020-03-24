@@ -1,3 +1,7 @@
+<?php
+    require 'includes/db.php';
+    require 'includes/displayBikes.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,58 +14,7 @@
 <body>
     <h1>Bike Collector App</h1>
     <div class='card-container'>
-        <div class='card'>
-            <img class='bike-image' src="images/sb130.jpeg" alt="Yeti sb130 bike">
-            <div class="card-info-container">
-                <section>Make: Yeti</section>
-                <section>Model: sb130</section>
-                <section>Discipline: Trail</section>
-                <section>Wheel Size: 29er</section>
-            </div>
-            <div class='card-button-container'>
-                <button>Edit Bike</button>
-                <button>Delete Bike</button>
-            </div>
-        </div>
-        <div class='card'>
-        <img class='bike-image' src="images/sb130.jpeg" alt="Yeti sb130 bike">
-            <div class="card-info-container">
-                <section>Make: Yeti</section>
-                <section>Model: sb130</section>
-                <section>Discipline: Trail</section>
-                <section>Wheel Size: 29er</section>
-            </div>
-            <div class='card-button-container'>
-                <button>Edit Bike</button>
-                <button>Delete Bike</button>
-            </div>
-        </div>
-        <div class='card'>
-        <img class='bike-image' src="images/sb130.jpeg" alt="Yeti sb130 bike">
-            <div class="card-info-container">
-                <section>Make: Yeti</section>
-                <section>Model: sb130</section>
-                <section>Discipline: Trail</section>
-                <section>Wheel Size: 29er</section>
-            </div>
-            <div class='card-button-container'>
-                <button>Edit Bike</button>
-                <button>Delete Bike</button>
-            </div>
-        </div>
-        <div class='card'>
-        <img class='bike-image' src="images/sb130.jpeg" alt="Yeti sb130 bike">
-            <div class="card-info-container">
-                <section>Make: Yeti</section>
-                <section>Model: sb130</section>
-                <section>Discipline: Trail</section>
-                <section>Wheel Size: 29er</section>
-            </div>
-            <div class='card-button-container'>
-                <button>Edit Bike</button>
-                <button>Delete Bike</button>
-            </div>
-        </div>
+        <?php  printCards($bikes);?>
     </div>
     <form class='add-form' method="get">
         <button class='button-add' type="submit">Add Bike</button>
