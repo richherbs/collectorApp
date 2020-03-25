@@ -11,12 +11,16 @@ if(!defined('SAFETORUN')){
  * @param array $aDBQuery
  * @return void
  */
-function populateSelector(array $aDBQuery) : string{
+function populateSelector(array $aDBQuery, string $default) : string{
     $result = '';
     foreach($aDBQuery as $anItem){
         $id = $anItem['id'];
         $name = $anItem['name'];
-        $result .= "<option value='$id'>$name</option><br>";
+        if($default != $name){
+            $result .= "<option value='$id'>$name</option><br>";
+        }else {
+            $result .= "<option value='$id' selected>$name</option><br>";
+        }
     }
     return $result;
 }

@@ -54,7 +54,7 @@ function printCards (array $allBikes){
         $allCards .= "<section>Model: $model</section>";
         $allCards .= "<section>Discipline: $discipline</section>";
         $allCards .= "<section>Wheel Size: $wheels</section>";
-        $allCards .= "</div>";
+        $allCards .= "</div>";  
         $allCards .= "<div class='card-button-container'>";
         $allCards .= "<form method='get' action='editPage.php'>";
         $allCards .= "<button type='submit' name='edit' value='$id'>Edit Bike</button>";

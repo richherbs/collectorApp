@@ -12,7 +12,7 @@
         <select name="brand">
             <?php
                 $makes = selectorQuery($db, 'brand_name', 'brand');
-                echo populateSelector($makes);
+                echo populateSelector($makes, '');
             ?>
         </select>
         <label for="model">Model</label>
@@ -21,14 +21,14 @@
         <select name="discipline">
             <?php
                 $disciplines = selectorQuery($db, 'discipline_name', 'discipline');
-                echo populateSelector($disciplines);
+                echo populateSelector($disciplines, '');
             ?>
         </select>
         <label for="wheelsize">Wheel Size</label>
         <select name="wheelsize">
             <?php
                 $wheelsize = selectorQuery($db, 'wheel_diameter', 'wheelSize');
-                echo populateSelector($wheelsize);
+                echo populateSelector($wheelsize, '');
             ?>
         <label for="pic">Picture</label>
         <input type="file" name="pic">

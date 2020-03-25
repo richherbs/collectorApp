@@ -22,18 +22,19 @@
      */
     function populateEditForm(int $bikeToEdit, PDO $aDBConn) : array{
         // prepare
-        $query = $aDBConn->prepare("SELECT bikes.id, brand.brand_name, bikes.model, discipline.discipline_name, wheelSize.wheel_diameter, bikes.pic_url
+        $query = $aDBConn->prepare("SELECT bikes.id, brand.brand_name, bikes.model, discipline.discipline_name, wheelSize.wheel_diameter
         FROM bikes
         INNER JOIN brand ON brand.id = bikes.brand_ID
         INNER JOIN discipline ON discipline.id = bikes.discipline_ID
         INNER JOIN wheelSize ON wheelSize.id = bikes.wheelSize_ID
-        WHERE id = :bikeToEdit
+        WHERE bikes.id = :bikeToEdit
         ");
 
         // execute
         $query->execute(['bikeToEdit' => $bikeToEdit]);
 
-        return $query->fetch();
+        $result = $query->fetchAll();
+        return $result;
     }
 
     /**
@@ -58,11 +59,15 @@
 
     if(isset($_GET['edit'])){
         $bikeToEdit = editClick();
-        populateEditForm($bikeToEdit, $db);
-    } elseif (isset($_GET['updateBike'])){
-        $make = $_POST['make'];
+        $theBike = populateEditForm($bikeToEdit, $db);
+    } 
+    
+    if (isset($_POST['updateBike'])){
+        $bikeToEdit = editClick();
+        $make = (int) $_POST['brand'];
         $model = $_POST['model'];
-        $discipline = $_POST['discipline'];
-        $wheelsize = $_POST['wheelsize'];
-        editQuery(editClick(), $make, $model, $discipline, $wheelsize, $db);
+        $discipline = (int) $_POST['discipline'];
+        $wheelsize = (int) $_POST['wheelsize'];
+        editQuery($bikeToEdit, $make, $model, $discipline, $wheelsize, $db);
+        echo '<script>window.location = "index.php"</script>';
     }
