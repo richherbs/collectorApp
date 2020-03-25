@@ -1,3 +1,6 @@
+<?php 
+define('SAFETORUN', true); 
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

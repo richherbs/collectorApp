@@ -1,7 +1,7 @@
 <?php
+    require 'includes/header.php';
     require 'includes/db.php';
     require 'includes/displayBikes.php';
-    require 'includes/header.php';
 ?>
 
 <body>

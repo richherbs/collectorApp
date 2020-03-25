@@ -11,9 +11,7 @@
         <label for="make">Make</label>
         <select name="brand">
             <?php
-                $query = $db->prepare("SELECT id, brand_name as name FROM brand");
-                $query->execute();
-                $makes = $query->fetchAll();
+                $makes = selectorQuery($db, 'brand_name', 'brand');
                 populateSelector($makes);
             ?>
         </select>
@@ -22,23 +20,19 @@
         <label for="discipline">Discipline</label>
         <select name="discipline">
             <?php
-                $query = $db->prepare("SELECT id, discipline_name as name FROM discipline");
-                $query->execute();
-                $disciplines = $query->fetchAll();
+                $disciplines = selectorQuery($db, 'discipline_name', 'discipline');
                 populateSelector($disciplines);
             ?>
         </select>
         <label for="wheelsize">Wheel Size</label>
         <select name="wheelsize">
             <?php
-                $query = $db->prepare("SELECT id, wheel_diameter as name FROM wheelSize");
-                $query->execute();
-                $wheelsize = $query->fetchAll();
+                $wheelsize = selectorQuery($db, 'wheel_diameter', 'wheelSize');
                 populateSelector($wheelsize);
             ?>
         <label for="pic">Picture</label>
         <input type="file" name="pic">
-        <button class='' type="submit" name="submit">Add Bike</button>
+        <button type="submit" name="submitAdd">Add Bike</button>
     </form>
 </body>
 </html>

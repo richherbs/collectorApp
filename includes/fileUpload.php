@@ -1,4 +1,15 @@
 <?php
+
+if(!defined('SAFETORUN')){
+    echo 'You can\'t run this file on its own.';
+    die;
+}
+
+/**
+ * Take the information from the $_FILES super global to store an image file in the images folder and return the string containing the path to the image
+ *
+ * @return string - the relative path to the image in the site file structure
+ */
 function uploadImage() :string {
     $target_dir = "images/";
     $target_file = $target_dir . basename($_FILES["pic"]["name"]);
@@ -45,6 +56,13 @@ function uploadImage() :string {
     return $target_file;
 }
 
+/**
+ * Taking information from the form and the path of an image in the server file system store a new entry in the bikes table
+ *
+ * @param string $aFilePath - path to the image of a new entry
+ * @param PDO $aDBConnection - a connection to a database
+ * @return void
+ */
 function addNewBikeToDB(string $aFilePath, PDO $aDBConnection){
     $make = $_POST['brand'];
     $model = $_POST['model'];
@@ -59,7 +77,7 @@ function addNewBikeToDB(string $aFilePath, PDO $aDBConnection){
     $query->execute(['make'=>$make, 'model'=>$model, 'discipline'=>$discipline, 'wheelsize'=>$wheelsize, 'pic'=>$aFilePath]);
 }
 
-if(isset($_POST['submit'])){
+if(isset($_POST['submitAdd'])){
 
     $filePath = uploadImage();
 

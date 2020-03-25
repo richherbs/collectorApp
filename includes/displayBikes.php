@@ -1,5 +1,15 @@
 <?php
+if(!defined('SAFETORUN')){
+    echo 'You can\'t run this file on its own.';
+    die;
+}
 
+/**
+ * take in a db connection and return card html objects with the information from the bikes table in them
+ *
+ * @param PDO $aDB - a db connection
+ * @return void
+ */
 function printCards (PDO $aDB){
 
     // prepare
@@ -15,11 +25,12 @@ function printCards (PDO $aDB){
     $allBikes = $query->fetchAll();
 
     foreach($allBikes as $bike){
-    $pic = $bike['pic_url'];
-    $brand = $bike['brand_name'];
-    $model = $bike['model'];
-    $discipline = $bike['discipline_name'];
-    $wheels = $bike['wheel_diameter'];
+        $pic = $bike['pic_url'];
+        $brand = $bike['brand_name'];
+        $model = $bike['model'];
+        $discipline = $bike['discipline_name'];
+        $wheels = $bike['wheel_diameter'];
+        
         echo "<div class='card'>";
             echo "<img class='bike-image' src='$pic' alt='$brand $model bike'>";
             echo '<div class="card-info-container">';
