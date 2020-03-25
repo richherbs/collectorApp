@@ -13,36 +13,36 @@ if(!defined('SAFETORUN')){
 function uploadImage() :string {
     $target_dir = "images/";
     $target_file = $target_dir . basename($_FILES["pic"]["name"]);
-    $uploadOk = 1;
+    $uploadOk = true;
     $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
+    // Check if file already exists
+    if (file_exists($target_file)) {
+        echo "Sorry, file already exists.";
+        $uploadOk = false;
+    }
+    
     // Check if image file is a actual image or fake image
     if(isset($_POST["submit"])) {
         $check = getimagesize($_FILES["pic"]["tmp_name"]);
         if($check !== false) {
             echo "File is an image - " . $check["mime"] . ".";
-            $uploadOk = 1;
+            $uploadOk = true;
         } else {
             echo "File is not an image.";
-            $uploadOk = 0;
+            $uploadOk = false;
         }
-    }
-
-    // Check if file already exists
-    if (file_exists($target_file)) {
-        echo "Sorry, file already exists.";
-        $uploadOk = 0;
     }
 
     // Allow certain file formats
     if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
     && $imageFileType != "gif" ) {
         echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-        $uploadOk = 0;
+        $uploadOk = false;
     }   
 
     // Check if $uploadOk is set to 0 by an error
-    if ($uploadOk == 0) {
+    if (!$uploadOk) {
         echo "Sorry, your file was not uploaded.";
     // if everything is ok, try to upload file
     } else {
@@ -53,11 +53,15 @@ function uploadImage() :string {
         }
     }
 
+    if(!$uploadOk){
+        return '';
+    }
     return $target_file;
 }
 
 /**
- * Taking information from the form and the path of an image in the server file system store a new entry in the bikes table
+ * Taking information from the form and the path of an image in the server file system store a new entry in the bikes table.
+ * If the pathname is null or the model is null then do not update the DB.
  *
  * @param string $aFilePath - path to the image of a new entry
  * @param PDO $aDBConnection - a connection to a database
@@ -69,12 +73,16 @@ function addNewBikeToDB(string $aFilePath, PDO $aDBConnection){
     $discipline = $_POST['discipline'];
     $wheelsize = $_POST['wheelsize'];
 
-    // prepare
-    $query = $aDBConnection->prepare("INSERT INTO bikes (brand_ID, model, discipline_ID, wheelSize_id, pic_url)
-                            VALUES (:make, :model, :discipline, :wheelsize, :pic)");
+    if($aFilePath == ''){
+        echo 'The database has not been updated as either the pic or the model is not there.';
+    } else {
+        // prepare
+        $query = $aDBConnection->prepare("INSERT INTO bikes (brand_ID, model, discipline_ID, wheelSize_id, pic_url)
+        VALUES (:make, :model, :discipline, :wheelsize, :pic)");
 
-    // execute
-    $query->execute(['make'=>$make, 'model'=>$model, 'discipline'=>$discipline, 'wheelsize'=>$wheelsize, 'pic'=>$aFilePath]);
+        // execute
+        $query->execute(['make'=>$make, 'model'=>$model, 'discipline'=>$discipline, 'wheelsize'=>$wheelsize, 'pic'=>$aFilePath]);
+    }
 }
 
 if(isset($_POST['submitAdd'])){

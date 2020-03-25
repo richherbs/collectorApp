@@ -1,6 +1,6 @@
 <?php
-    require 'includes/db.php';
     require 'includes/header.php';
+    require 'includes/db.php';
     require 'includes/fileUpload.php';
     require 'includes/populateSelectors.php';
 ?>
