@@ -14,7 +14,7 @@ if(!defined('SAFETORUN')){
  */
 function connectToMySQLDb(string $aDBName, string $aUser, string $aPass) : PDO {
     // connect
-    $db = new PDO("mysql:host=db; dbname=$aDBName", "$aUser", "$aPass");
+    $db = new PDO("mysql:host=db; dbname=$aDBName", $aUser, $aPass);
     $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
     return $db;
 }

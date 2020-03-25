@@ -11,12 +11,14 @@ if(!defined('SAFETORUN')){
  * @param array $aDBQuery
  * @return void
  */
-    function populateSelector(array $aDBQuery){
-        foreach($aDBQuery as $anItem){
-            $id = $anItem['id'];
-            $name = $anItem['name'];
-            echo "<option value='$id'>$name</option><br>";
-        }
+function populateSelector(array $aDBQuery) : string{
+    $result = '';
+    foreach($aDBQuery as $anItem){
+        $id = $anItem['id'];
+        $name = $anItem['name'];
+        $result .= "<option value='$id'>$name</option><br>";
+    }
+    return $result;
 }
 /**
  * Creates a query to return the info in a table using an existing db connection 
@@ -26,10 +28,10 @@ if(!defined('SAFETORUN')){
  * @param string $aTableName
  * @return array
  */
-    function selectorQuery(PDO $aDBConn, string $aColumnName, string $aTableName) : array {
-        $query = $aDBConn->prepare("SELECT id, $aColumnName as name FROM $aTableName");
-        $query->execute();
-        $result = $query->fetchAll();
-        return $result;
-    }
+function selectorQuery(PDO $aDBConn, string $aColumnName, string $aTableName) : array {
+    $query = $aDBConn->prepare("SELECT id, $aColumnName as name FROM $aTableName");
+    $query->execute();
+    $result = $query->fetchAll();
+    return $result;
+}
         

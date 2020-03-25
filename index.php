@@ -7,7 +7,10 @@
 <body>
     <h1>Bike Collector App</h1>
     <div class='card-container'>
-        <?php  printCards($db);?>
+        <?php  
+            $bikes = getBikesFromDB($db);
+            echo printCards($bikes);
+        ?>
     </div>
     <form class='add-form' method="get">
         <button class='button-add' ><a href="addBike.php">Add Bike</a></button>

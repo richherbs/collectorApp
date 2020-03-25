@@ -5,15 +5,14 @@ if(!defined('SAFETORUN')){
 }
 
 /**
- * take in a db connection and return card html objects with the information from the bikes table in them
+ * Take in a DB connection and return the array of all bikes in the bikes table
  *
- * @param PDO $aDB - a db connection
- * @return void
+ * @param PDO $aDBConn
+ * @return array
  */
-function printCards (PDO $aDB){
-
+function getBikesFromDB (PDO $aDBConn) : array {
     // prepare
-    $query = $aDB->prepare("SELECT brand.brand_name, bikes.model, discipline.discipline_name, wheelSize.wheel_diameter, bikes.pic_url
+    $query = $aDBConn->prepare("SELECT brand.brand_name, bikes.model, discipline.discipline_name, wheelSize.wheel_diameter, bikes.pic_url
                             FROM bikes
                             INNER JOIN brand ON brand.id = bikes.brand_ID
                             INNER JOIN discipline ON discipline.id = bikes.discipline_ID
@@ -24,6 +23,18 @@ function printCards (PDO $aDB){
 
     $allBikes = $query->fetchAll();
 
+    return $allBikes;
+}
+
+/**
+ * Take in an array containing all bikes in the DB and return a card object for each in html
+ *
+ * @param array $allBikes
+ * @return void
+ */
+function printCards (array $allBikes){
+    $allCards = '';
+
     foreach($allBikes as $bike){
         $pic = $bike['pic_url'];
         $brand = $bike['brand_name'];
@@ -31,18 +42,19 @@ function printCards (PDO $aDB){
         $discipline = $bike['discipline_name'];
         $wheels = $bike['wheel_diameter'];
         
-        echo "<div class='card'>";
-            echo "<img class='bike-image' src='$pic' alt='$brand $model bike'>";
-            echo '<div class="card-info-container">';
-                echo "<section>Make: $brand</section>";
-                echo "<section>Model: $model</section>";
-                echo "<section>Discipline: $discipline</section>";
-                echo "<section>Wheel Size: $wheels</section>";
-            echo "</div>";
-            echo "<div class='card-button-container'>";
-                echo "<button>Edit Bike</button>";
-                echo "<button>Delete Bike</button>";
-            echo "</div>";
-        echo "</div>";
+        $allCards .= "<div class='card'>";
+        $allCards .= "<img class='bike-image' src='$pic' alt='$brand $model bike'>";
+        $allCards .= '<div class="card-info-container">';
+        $allCards .= "<section>Make: $brand</section>";
+        $allCards .= "<section>Model: $model</section>";
+        $allCards .= "<section>Discipline: $discipline</section>";
+        $allCards .= "<section>Wheel Size: $wheels</section>";
+        $allCards .= "</div>";
+        $allCards .= "<div class='card-button-container'>";
+        $allCards .= "<button>Edit Bike</button>";
+        $allCards .= "<button>Delete Bike</button>";
+        $allCards .= "</div>";
+        $allCards .= "</div>";
     }
+    return $allCards;
 }
