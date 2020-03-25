@@ -12,7 +12,7 @@ if(!defined('SAFETORUN')){
  */
 function getBikesFromDB (PDO $aDBConn) : array {
     // prepare
-    $query = $aDBConn->prepare("SELECT brand.brand_name, bikes.model, discipline.discipline_name, wheelSize.wheel_diameter, bikes.pic_url
+    $query = $aDBConn->prepare("SELECT bikes.id, brand.brand_name, bikes.model, discipline.discipline_name, wheelSize.wheel_diameter, bikes.pic_url, bikes.deleted
                             FROM bikes
                             INNER JOIN brand ON brand.id = bikes.brand_ID
                             INNER JOIN discipline ON discipline.id = bikes.discipline_ID
@@ -36,6 +36,11 @@ function printCards (array $allBikes){
     $allCards = '';
 
     foreach($allBikes as $bike){
+        $deleted = $bike['deleted'];
+        if($deleted){
+            continue;
+        }
+        $id = $bike['id'];
         $pic = $bike['pic_url'];
         $brand = $bike['brand_name'];
         $model = $bike['model'];
@@ -51,8 +56,12 @@ function printCards (array $allBikes){
         $allCards .= "<section>Wheel Size: $wheels</section>";
         $allCards .= "</div>";
         $allCards .= "<div class='card-button-container'>";
-        $allCards .= "<button>Edit Bike</button>";
-        $allCards .= "<button>Delete Bike</button>";
+        $allCards .= "<form method='get' action='editPage.php'>";
+        $allCards .= "<button type='submit' name='edit' value='$id'>Edit Bike</button>";
+        $allCards .= "</form>";
+        $allCards .= "<form method='get'>";
+        $allCards .= "<button type='submit' name='delete' value='$id'>Delete Bike</button>";
+        $allCards .= "</form>";
         $allCards .= "</div>";
         $allCards .= "</div>";
     }

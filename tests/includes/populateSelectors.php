@@ -22,7 +22,7 @@
         public function testMalformedPopulateSelector(){
             $expected = '';
             $input = 'string';
-            $this->expectException(TypeError::class, $case);
+            $this->expectException(TypeError::class);
             $case = populateSelector($input);
         }
     }

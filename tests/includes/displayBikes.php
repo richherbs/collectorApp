@@ -20,7 +20,7 @@
 
         public function testMalformedPrintCards(){
             $input = 'string';
-            $this->expectException(TypeError::class, $case);
+            $this->expectException(TypeError::class);
             $case = printCards($input);
         }
     }

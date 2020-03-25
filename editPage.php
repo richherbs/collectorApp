@@ -1,12 +1,11 @@
 <?php
     require 'includes/header.php';
     require 'includes/db.php';
-    require 'includes/fileUpload.php';
     require 'includes/populateSelectors.php';
+    require 'includes/editBike.php';
 ?>
-
 <body>
-    <h1>Add a Bike to Your Collection</h1>
+    <h1>Edit a Bike</h1>
     <form class='add-bike-form' method="post" enctype="multipart/form-data">
         <label for="make">Make</label>
         <select name="brand">
@@ -30,9 +29,7 @@
                 $wheelsize = selectorQuery($db, 'wheel_diameter', 'wheelSize');
                 echo populateSelector($wheelsize);
             ?>
-        <label for="pic">Picture</label>
-        <input type="file" name="pic">
-        <button type="submit" name="submitAdd">Add Bike</button>
+        <button type="submit" name="updateBike">Add Bike</button>
     </form>
 </body>
 </html>
