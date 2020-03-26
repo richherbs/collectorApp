@@ -7,22 +7,25 @@
     class SomeTests extends TestCase{
         public function testSuccessPopulateSelector(){
             $expected = '<option value=\'1\'>bob</option><br>';
-            $input = [['id' => 1, 'name'=> 'bob']];
-            $case = populateSelector($input);
+            $inputArray = [['id' => 1, 'name'=> 'bob']];
+            $inputString = '';
+            $case = populateSelector($inputArray, $inputString);
             $this->assertEquals($expected, $case);
         }
 
         public function testFailurePopulateSelector(){
             $expected = '<option value=\'1\'>bob</option><br>';
-            $input = [['id' => 2, 'name'=> 'neil']];
-            $case = populateSelector($input);
+            $inputArray = [['id' => 2, 'name'=> 'neil']];
+            $inputString = '';
+            $case = populateSelector($inputArray, $inputString);
             $this->assertNotEquals($expected, $case);
         }
 
         public function testMalformedPopulateSelector(){
             $expected = '';
-            $input = 'string';
+            $inputNonArray = 'string';
+            $inputNonString = 74;
             $this->expectException(TypeError::class);
-            $case = populateSelector($input);
+            $case = populateSelector($inputNonArray, $inputNonString);
         }
     }

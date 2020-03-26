@@ -12,11 +12,13 @@ if(!defined('SAFETORUN')){
  */
 function getBikesFromDB (PDO $aDBConn) : array {
     // prepare
-    $query = $aDBConn->prepare("SELECT bikes.id, brand.brand_name, bikes.model, discipline.discipline_name, wheelSize.wheel_diameter, bikes.pic_url, bikes.deleted
+    $query = $aDBConn->prepare("SELECT bikes.id, brand.brand_name, bikes.model, discipline.discipline_name, wheelSize.wheel_diameter, bikes.pic_url
                             FROM bikes
                             INNER JOIN brand ON brand.id = bikes.brand_ID
                             INNER JOIN discipline ON discipline.id = bikes.discipline_ID
-                            INNER JOIN wheelSize ON wheelSize.id = bikes.wheelSize_ID");
+                            INNER JOIN wheelSize ON wheelSize.id = bikes.wheelSize_ID
+                            WHERE deleted = 0
+                            ");
 
     // execute
     $query->execute();
@@ -36,10 +38,6 @@ function printCards (array $allBikes){
     $allCards = '';
 
     foreach($allBikes as $bike){
-        $deleted = $bike['deleted'];
-        if($deleted){
-            continue;
-        }
         $id = $bike['id'];
         $pic = $bike['pic_url'];
         $brand = $bike['brand_name'];

@@ -21,7 +21,7 @@ function uploadImage() :string {
         $check = getimagesize($_FILES["pic"]["tmp_name"]);
         if($check !== false) {
             echo "File is an image - " . $check["mime"] . ".";
-            $uploadOk = true;
+            $uploadOk = true; 
         } else {
             echo "File is not an image.";
             $uploadOk = false;
