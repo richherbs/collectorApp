@@ -30,6 +30,7 @@
                 $wheelsize = selectorQuery($db, 'wheel_diameter', 'wheelSize');
                 echo populateSelector($wheelsize, '');
             ?>
+            </select>
         <label for="pic">Picture</label>
         <input type="file" name="pic">
         <button type="submit" name="submitAdd">Add Bike</button>
