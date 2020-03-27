@@ -1,5 +1,12 @@
 <?php 
 define('SAFETORUN', true); 
+require 'includes/db.php';
+require 'includes/displayBikes.php';
+require 'includes/deleteBike.php';
+require 'includes/populateSelectors.php';
+require 'includes/editBike.php';
+require 'includes/fileUpload.php';
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -68,6 +68,11 @@
         $model = $_POST['model'];
         $discipline = (int) $_POST['discipline'];
         $wheelsize = (int) $_POST['wheelsize'];
-        editQuery($bikeToEdit, $make, $model, $discipline, $wheelsize, $db);
-        echo '<script>window.location = "index.php"</script>';
+        if(array_key_exists($make, selectorQuery($db, 'brand_name', 'brand')) && !empty($model) && array_key_exists($discipline, selectorQuery($db, 'discipline_name', 'discipline')) && array_key_exists($wheelsize, selectorQuery($db, 'wheel_diameter', 'wheelSize'))){
+            echo 'success!';      
+            editQuery($bikeToEdit, $make, $model, $discipline, $wheelsize, $db);
+            echo '<script>window.location = "index.php"</script>';
+        } else {
+            echo 'Please make sure you make valid selections!';
+        }
     }

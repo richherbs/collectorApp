@@ -18,7 +18,8 @@ function connectToMySQLDb(string $aDBName, string $aUser, string $aPass) : PDO {
     $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
     return $db;
 }
-$name = 'bikeCollectorApp';
+
+$DBName = 'bikeCollectorApp';
 $user = 'root';
 $pass = 'password';
-$db = connectToMySQLDb($name, $user, $pass);
+$db = connectToMySQLDb($DBName, $user, $pass);

@@ -41,7 +41,7 @@ function uploadImage() :string {
     // if everything is ok, try to upload file
     } else {
         if (move_uploaded_file($_FILES["pic"]["tmp_name"], $target_file)) {
-            echo '<script>window.location = "index.php"</script>';
+            echo 'File Uploaded';
         } else {
             echo "Sorry, there was an error uploading your file.";
         }
@@ -61,7 +61,7 @@ function uploadImage() :string {
  * @param PDO $aDBConnection - a connection to a database
  * @return void
  */
-function addNewBikeToDB(string $aFilePath, PDO $aDBConnection){
+function addNewBikeToDB(string $aFilePath, PDO $aDBConnection, int $aMake, string $aModel, int $aDiscipline, int $aWheelsize){
     $make = $_POST['brand'];
     $model = $_POST['model'];
     $discipline = $_POST['discipline'];
@@ -75,14 +75,21 @@ function addNewBikeToDB(string $aFilePath, PDO $aDBConnection){
         VALUES (:make, :model, :discipline, :wheelsize, :pic)");
 
         // execute
-        $query->execute(['make'=>$make, 'model'=>$model, 'discipline'=>$discipline, 'wheelsize'=>$wheelsize, 'pic'=>$aFilePath]);
+        $query->execute(['make'=>$aMake, 'model'=>$aModel, 'discipline'=>$aDiscipline, 'wheelsize'=>$aWheelsize, 'pic'=>$aFilePath]);
     }
 }
 
 if(isset($_POST['submitAdd'])){
-
-    $filePath = uploadImage();
-
-    addNewBikeToDB($filePath, $db);
+    $make = $_POST['brand'];
+    $model = $_POST['model'];
+    $discipline = $_POST['discipline'];
+    $wheelsize = $_POST['wheelsize'];
+    if(array_key_exists($make, selectorQuery($db, 'brand_name', 'brand')) && !empty($model) && array_key_exists($discipline, selectorQuery($db, 'discipline_name', 'discipline')) && array_key_exists($wheelsize, selectorQuery($db, 'wheel_diameter', 'wheelSize'))){
+        $filePath = uploadImage();
+        addNewBikeToDB($filePath, $db, $make, $model, $discipline, $wheelsize);
+        echo '<script>window.location = "index.php"</script>';
+    } else {
+        echo 'Please make sure you make valid selections!';
+    }
 }
 ?>

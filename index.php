@@ -1,8 +1,5 @@
 <?php
-    require 'includes/header.php';
-    require 'includes/db.php';
-    require 'includes/displayBikes.php';
-    require 'includes/deleteBike.php';
+require 'includes/header.php';
 ?>
 
 <body>
